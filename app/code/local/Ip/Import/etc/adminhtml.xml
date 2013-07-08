@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<config>
+
+    <menu>
+        <system>
+            <children>
+                <convert>
+                    <children>
+                        <import translate="title" module="import">
+                            <title>Import - Custom</title>
+                            <action>import/custom</action>
+                            <sort_order>1</sort_order>
+                        </import>
+                    </children>
+                </convert>
+            </children>
+        </system>
+    </menu>
+
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <!--<admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ip_section translate="title" module="import">
+                                        <title>Custom Options</title>
+                                        <sort_order>100</sort_order>
+                                    </ip_section>
+                                </children>
+                            </config>
+                            <convert>
+                                <children>
+                                    <sync>
+                                        <title>Import - Group Prices</title>
+                                    </sync>
+                                </children>
+                            </convert>
+                        </children>
+                    </system>
+                </children>
+            </admin>-->
+        </resources>
+    </acl>
+</config>

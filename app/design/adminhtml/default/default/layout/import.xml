@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <import_custom_index>
+        <reference name="content">
+            <block type="core/template" name="import_custom" template="import/form.phtml" >
+                <block type="import/group_price" name="group_price" template="import/group/price.phtml" >
+                    <action method="setHiddenData"><value>group_price</value></action>
+                    <action method="setFileType"><value>csv</value></action>
+                </block>
+            </block>
+        </reference>
+    </import_custom_index>
+</layout>

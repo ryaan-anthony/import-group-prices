@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+
+    <modules>
+        <Ip_Import>
+            <version>0.1.0</version>
+        </Ip_Import>
+    </modules>
+
+    <admin>
+        <routers>
+            <import>
+                <use>admin</use>
+                <args>
+                    <module>Ip_Import</module>
+                    <frontName>import</frontName>
+                </args>
+            </import>
+        </routers>
+    </admin>
+
+    <global>
+        <blocks>
+            <import>
+                <class>Ip_Import_Block</class>
+            </import>
+        </blocks>
+    </global>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <import>
+                    <file>import.xml</file>
+                </import>
+            </updates>
+        </layout>
+    </adminhtml>
+
+</config>

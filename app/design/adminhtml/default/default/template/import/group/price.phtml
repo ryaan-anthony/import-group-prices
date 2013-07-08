@@ -1,0 +1,30 @@
+<?php
+/*
+ * @see Ip_Import_Block_Group_Price
+ */
+?>
+
+<table cellspacing="0" class="form-list">
+    <colgroup class="label"></colgroup>
+    <colgroup class="value"></colgroup>
+    <colgroup class="scope-label"></colgroup>
+    <colgroup class=""></colgroup>
+    <tbody>
+    <tr>
+        <td class="label">
+            <label for="general_region_display_all">Choose File:</label>
+        </td>
+        <td class="value">
+            <form method="post" enctype="multipart/form-data">
+                <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+                <input type="hidden" name="hidden_data" value="<?php echo $this->getHiddenData(); ?>" />
+                <input type="hidden" name="file_type" value="<?php echo $this->getFileType(); ?>" />
+                <input name="file" type="file" />
+                <p class="note"><span>Choose a .<?php echo $this->getFileType()?> file to upload</span></p>
+                <button type="submit" style="float:right;margin-bottom: 20px;"><span>Upload</span></button>
+            </form>
+        </td>
+        <td class="scope-label">[GLOBAL]</td><td class=""></td>
+    </tr>
+    </tbody>
+</table>
