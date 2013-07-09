@@ -34,6 +34,9 @@ class Ip_Import_CustomController extends Mage_Adminhtml_Controller_Action
 
     protected function import_group_price()
     {
+        $all_groups = false;
+        $website_id = Mage::app()->getStore()->getWebsiteId();
+        $insert = Mage::getSingleton('core/resource')->getConnection('core_write');
         $file = fopen($_FILES['file']['tmp_name'], "r");
         $columns = array();
         while ($data = fgetcsv($file, 2000, ",")) {
@@ -41,18 +44,27 @@ class Ip_Import_CustomController extends Mage_Adminhtml_Controller_Action
                 $columns = $data;
             } else {
                 $sku = $data[0];
-                $group_id = $data[1];
-                $group_price = $data[2];
+                $customer_group_id = $data[1];
+                $value = $data[2];
                 $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $sku);
-                $product->setData('group_price',array (
-                    array (
-                        "website_id" => Mage::app()->getStore()->getWebsiteId(),
-                        "cust_group" => $group_id,
-                        "price" => $group_price
-                    )));
-                $product->save();
+                if($product && $product->getId()){
+                    $entity_id = $product->getId();
+                    $sql = "
+                        INSERT INTO catalog_product_entity_group_price (entity_id, all_groups, customer_group_id, value, website_id)
+                        VALUES ('$entity_id', '$all_groups', '$customer_group_id', '$value', '$website_id')
+                        ON DUPLICATE KEY UPDATE
+                            entity_id = '$entity_id',
+                            all_groups = '$all_groups',
+                            customer_group_id = '$customer_group_id',
+                            value = '$value',
+                            website_id = '$website_id';
+                    ";
+                    $insert->query($sql);
+                }
             }
         }
+        $sql = "UPDATE `index_process` SET `status` = 'require_reindex' WHERE indexer_code='catalog_product_price'";
+        $insert->query($sql);
     }
 
 
